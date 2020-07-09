@@ -1,5 +1,4 @@
 import React from "react";
-import Critter from "./Critter";
 import CritterList from "./CritterList";
 import "./App.css";
 

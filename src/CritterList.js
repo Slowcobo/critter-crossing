@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import CritterThumbnail from "./CritterThumbnail";
 import axios from "axios";
 
 export default function CritterList() {
@@ -14,11 +15,13 @@ export default function CritterList() {
 
   return (
     <div>
-      <ul>
-        {critters.map((critter) => (
-          <li key={critter.id}>{critter.name["name-USen"]}</li>
-        ))}
-      </ul>
+      {critters.map((critter) => (
+        <CritterThumbnail
+          key={critter.id}
+          icon={critter["icon_uri"]}
+          name={critter.name["name-USen"]}
+        />
+      ))}
     </div>
   );
 }
