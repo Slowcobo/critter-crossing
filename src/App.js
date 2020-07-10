@@ -14,7 +14,7 @@ function App() {
   const classes = useStyles();
   return (
     <Grid container justify="center">
-      <Grid item xs={12} md={7}>
+      <Grid item xs={12} md={6}>
         <CritterList />
       </Grid>
     </Grid>
