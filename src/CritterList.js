@@ -10,16 +10,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CritterList({ critters }) {
+export default function CritterList({ critters, getCritter }) {
   const classes = useStyles();
 
   return (
     <div className={classes.critterList}>
       {critters.map((critter) => (
         <CritterThumbnail
+          id={critter.id}
           key={critter.id}
           icon={critter["icon_uri"]}
           name={critter.name["name-USen"]}
+          getCritter={getCritter}
         />
       ))}
     </div>

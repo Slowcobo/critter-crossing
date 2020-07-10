@@ -21,19 +21,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CritterThumbnail({ icon, name }) {
+export default function CritterThumbnail({ id, icon, name, getCritter }) {
   const classes = useStyles();
   const displayName = name.charAt(0).toUpperCase() + name.slice(1);
 
   return (
     <Tooltip title={displayName} arrow>
-      <div className={classes.critterContainer}>
-        <img
-          className={classes.critter}
-          src={icon}
-          alt={name}
-          onClick={() => console.log(name)}
-        />
+      <div className={classes.critterContainer} onClick={() => getCritter(id)}>
+        <img className={classes.critter} src={icon} alt={name} />
       </div>
     </Tooltip>
   );
