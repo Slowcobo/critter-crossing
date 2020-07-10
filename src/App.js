@@ -1,5 +1,5 @@
 import React from "react";
-import CritterList from "./CritterList";
+import CritterApp from "./CritterApp";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import "./App.css";
@@ -15,7 +15,7 @@ function App() {
   return (
     <Grid container justify="center">
       <Grid item xs={12} md={6}>
-        <CritterList />
+        <CritterApp />
       </Grid>
     </Grid>
   );

@@ -4,18 +4,29 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   critterContainer: {
-    margin: "-0.05rem 0.1rem",
+    width: "90px",
+    height: "90px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f1f1f1",
+    margin: "0.1rem",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#e1e1e1",
+    },
   },
   critter: {
-    backgroundColor: "#f1f1f1",
-    width: "100%",
+    width: "70%",
   },
 }));
 
 export default function CritterThumbnail({ icon, name }) {
   const classes = useStyles();
+  const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+
   return (
-    <Tooltip title={name} arrow>
+    <Tooltip title={displayName} arrow>
       <div className={classes.critterContainer}>
         <img
           className={classes.critter}

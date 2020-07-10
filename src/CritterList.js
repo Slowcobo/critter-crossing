@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import axios from "axios";
 import CritterThumbnail from "./CritterThumbnail";
 
 const useStyles = makeStyles((theme) => ({
@@ -11,17 +10,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CritterList() {
+export default function CritterList({ critters }) {
   const classes = useStyles();
-  const [critters, setCritters] = useState([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const response = await axios.get("http://acnhapi.com/v1a/fish/");
-      setCritters(response.data);
-    };
-    getData();
-  }, []);
 
   return (
     <div className={classes.critterList}>
