@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "./Navbar";
 import CritterList from "./CritterList";
 import CritterInfo from "./CritterInfo";
 
@@ -28,6 +29,8 @@ export default function CritterApp() {
 
   return (
     <>
+      <Navbar />
+
       {/* Only render critter info if currentCritter has been selected */}
       {currentCritter && (
         <CritterInfo
