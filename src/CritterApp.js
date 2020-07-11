@@ -5,20 +5,28 @@ import CritterInfo from "./CritterInfo";
 
 export default function CritterApp() {
   const [mode, setMode] = useState("fish");
-  const [critters, setCritters] = useState([]);
+  const [critters, setCritters] = useState({ fish: [] });
   const [currentCritter, setCurrentCritter] = useState();
   const [showCritter, setShowCritter] = useState(false);
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await axios.get(`http://acnhapi.com/v1a/${mode}/`);
-      setCritters(response.data);
+    const getCritterData = async () => {
+      const bugRes = await axios.get("http://acnhapi.com/v1a/bugs/");
+      const fishRes = await axios.get("http://acnhapi.com/v1a/fish/");
+      const seaRes = await axios.get("http://acnhapi.com/v1a/sea/");
+
+      const critterData = {
+        bugs: bugRes.data,
+        fish: fishRes.data,
+        sea: seaRes.data,
+      };
+      setCritters(critterData);
     };
-    getData();
-  }, [mode]);
+    getCritterData();
+  }, []);
 
   const getCritter = (critterId) => {
-    setCurrentCritter(critters[critterId - 1]);
+    setCurrentCritter(critters[mode][critterId - 1]);
     setShowCritter(true);
   };
 
@@ -33,17 +41,17 @@ export default function CritterApp() {
       {currentCritter && (
         <CritterInfo
           critter={currentCritter}
-          critters={critters}
+          critters={critters[mode]}
           getCritter={getCritter}
           showCritter={showCritter}
           closeCritter={closeCritter}
         />
       )}
       {/* Show list of current critters */}
+      <button onClick={() => setMode("bugs")}>Bugs</button>
       <button onClick={() => setMode("fish")}>Fish</button>
       <button onClick={() => setMode("sea")}>Sea</button>
-      <button onClick={() => setMode("bugs")}>Bugs</button>
-      <CritterList critters={critters} getCritter={getCritter} />
+      <CritterList critters={critters[mode]} getCritter={getCritter} />
     </>
   );
 }
