@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import CritterList from "./CritterList";
 import CritterInfo from "./CritterInfo";
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 export default function CritterApp() {
+  const classes = useStyles();
   const [mode, setMode] = useState("bugs");
   const [date, setDate] = useState({ month: "", time: "" });
   const [critters, setCritters] = useState({ bugs: [], fish: [], sea: [] });
@@ -44,6 +61,11 @@ export default function CritterApp() {
     setShowCritterInfo(false);
   };
 
+  const handleChange = (event) => {
+    const newDate = { ...date, month: event.target.value };
+    setDate(newDate);
+  };
+
   return (
     <>
       {/* Only render critter info if currentCritter has been selected */}
@@ -56,10 +78,37 @@ export default function CritterApp() {
           closeCritterInfo={closeCritterInfo}
         />
       )}
-      {/* Show list of current critters */}
+
+      {/* Switch Critters */}
       <button onClick={() => setMode("bugs")}>Bugs</button>
       <button onClick={() => setMode("fish")}>Fish</button>
       <button onClick={() => setMode("sea")}>Sea</button>
+
+      {/* Month Selection */}
+      <FormControl className={classes.formControl}>
+        <InputLabel id="month-selector">Month</InputLabel>
+        <Select
+          labelId="month-selector"
+          id="month-selector"
+          value={date.month}
+          onChange={handleChange}
+        >
+          <MenuItem value={1}>January</MenuItem>
+          <MenuItem value={2}>February</MenuItem>
+          <MenuItem value={3}>March</MenuItem>
+          <MenuItem value={4}>April</MenuItem>
+          <MenuItem value={5}>May</MenuItem>
+          <MenuItem value={6}>June</MenuItem>
+          <MenuItem value={7}>July</MenuItem>
+          <MenuItem value={8}>August</MenuItem>
+          <MenuItem value={9}>September</MenuItem>
+          <MenuItem value={10}>October</MenuItem>
+          <MenuItem value={11}>November</MenuItem>
+          <MenuItem value={12}>December</MenuItem>
+        </Select>
+      </FormControl>
+
+      {/* List of current critters */}
       <CritterList
         critters={critters[mode]}
         date={date}
