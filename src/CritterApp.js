@@ -4,10 +4,11 @@ import CritterList from "./CritterList";
 import CritterInfo from "./CritterInfo";
 
 export default function CritterApp() {
-  const [mode, setMode] = useState("fish");
-  const [critters, setCritters] = useState({ fish: [] });
+  const [mode, setMode] = useState("bugs");
+  const [date, setDate] = useState(new Date());
+  const [critters, setCritters] = useState({ bugs: [], fish: [], sea: [] });
   const [currentCritter, setCurrentCritter] = useState();
-  const [showCritter, setShowCritter] = useState(false);
+  const [showCritterInfo, setShowCritterInfo] = useState(false);
 
   useEffect(() => {
     const getCritterData = async () => {
@@ -27,12 +28,12 @@ export default function CritterApp() {
 
   const getCritter = (critterId) => {
     setCurrentCritter(critters[mode][critterId - 1]);
-    setShowCritter(true);
+    setShowCritterInfo(true);
   };
 
-  const closeCritter = () => {
+  const closeCritterInfo = () => {
     setCurrentCritter();
-    setShowCritter(false);
+    setShowCritterInfo(false);
   };
 
   return (
@@ -43,15 +44,19 @@ export default function CritterApp() {
           critter={currentCritter}
           critters={critters[mode]}
           getCritter={getCritter}
-          showCritter={showCritter}
-          closeCritter={closeCritter}
+          showCritterInfo={showCritterInfo}
+          closeCritterInfo={closeCritterInfo}
         />
       )}
       {/* Show list of current critters */}
       <button onClick={() => setMode("bugs")}>Bugs</button>
       <button onClick={() => setMode("fish")}>Fish</button>
       <button onClick={() => setMode("sea")}>Sea</button>
-      <CritterList critters={critters[mode]} getCritter={getCritter} />
+      <CritterList
+        critters={critters[mode]}
+        date={date.getMonth()}
+        getCritter={getCritter}
+      />
     </>
   );
 }

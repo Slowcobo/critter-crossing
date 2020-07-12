@@ -18,11 +18,19 @@ const useStyles = makeStyles((theme) => ({
   },
   critter: {
     width: "70%",
+    opacity: (props) => (props.available ? "0.1" : "1"),
   },
 }));
 
-export default function CritterThumbnail({ id, icon, name, getCritter }) {
-  const classes = useStyles();
+export default function CritterThumbnail({
+  id,
+  icon,
+  name,
+  available,
+  getCritter,
+}) {
+  const props = { available: available };
+  const classes = useStyles(props);
   const displayName = name.charAt(0).toUpperCase() + name.slice(1);
 
   return (

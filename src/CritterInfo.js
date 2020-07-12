@@ -17,8 +17,8 @@ export default function CritterInfo({
   critter,
   critters,
   getCritter,
-  showCritter,
-  closeCritter,
+  showCritterInfo,
+  closeCritterInfo,
 }) {
   const classes = useStyles();
   const displayName =
@@ -37,8 +37,8 @@ export default function CritterInfo({
 
   return (
     <Dialog
-      open={showCritter}
-      onClose={closeCritter}
+      open={showCritterInfo}
+      onClose={closeCritterInfo}
       aria-labelledby="critter-name"
       aria-describedby="critter-description"
     >
@@ -60,7 +60,7 @@ export default function CritterInfo({
         <Button onClick={() => getNextCritter(critter.id)} color="primary">
           Next
         </Button>
-        <Button onClick={closeCritter} color="primary">
+        <Button onClick={closeCritterInfo} color="primary">
           Close
         </Button>
       </DialogActions>

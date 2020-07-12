@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CritterList({ critters, getCritter }) {
+export default function CritterList({ date, critters, getCritter }) {
   const classes = useStyles();
 
   return (
@@ -21,9 +21,14 @@ export default function CritterList({ critters, getCritter }) {
           key={critter.id}
           icon={critter["icon_uri"]}
           name={critter.name["name-USen"]}
+          available={critter.availability["month-array-northern"].includes(
+            date
+          )}
           getCritter={getCritter}
         />
       ))}
     </div>
   );
 }
+
+//Critter availability month-array-northern
