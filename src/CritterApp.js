@@ -3,9 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
 import CritterList from "./CritterList";
 import CritterInfo from "./CritterInfo";
 
@@ -61,10 +62,19 @@ export default function CritterApp() {
     setShowCritterInfo(false);
   };
 
-  const handleChange = (event) => {
+  const handleMonthChange = (event) => {
     const newDate = { ...date, month: event.target.value };
     setDate(newDate);
   };
+
+  const handleTimeChange = (event, value) => {
+    const newDate = { ...date, time: value };
+    setDate(newDate);
+  };
+
+  function valuetext(value) {
+    return `${value}`;
+  }
 
   return (
     <>
@@ -91,7 +101,7 @@ export default function CritterApp() {
           labelId="month-selector"
           id="month-selector"
           value={date.month}
-          onChange={handleChange}
+          onChange={handleMonthChange}
         >
           <MenuItem value={1}>January</MenuItem>
           <MenuItem value={2}>February</MenuItem>
@@ -107,6 +117,22 @@ export default function CritterApp() {
           <MenuItem value={12}>December</MenuItem>
         </Select>
       </FormControl>
+
+      {/* Time Slider */}
+      <Typography id="discrete-slider" gutterBottom>
+        Time
+      </Typography>
+      <Slider
+        value={Number(date.time)}
+        getAriaValueText={valuetext}
+        aria-labelledby="discrete-slider"
+        valueLabelDisplay="auto"
+        step={1}
+        marks
+        min={0}
+        max={23}
+        onChange={handleTimeChange}
+      />
 
       {/* List of current critters */}
       <CritterList
