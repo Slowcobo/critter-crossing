@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   critter: {
     width: "70%",
-    opacity: (props) => (props.available ? "0.1" : "1"),
+    opacity: (props) => (props.available ? "1" : "0.1"),
   },
 }));
 

@@ -15,7 +15,10 @@ export default function CritterList({ date, critters, getCritter }) {
 
   //Check if critter is available for the month & hour
   const isAvailable = (critter) => {
-    return critter.availability["month-array-northern"].includes(date.month);
+    return (
+      critter.availability["month-array-northern"].includes(date.month) &&
+      critter.availability["time-array"].includes(date.time)
+    );
   };
 
   return (
