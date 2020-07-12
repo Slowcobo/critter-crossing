@@ -29,7 +29,7 @@ export default function CritterApp() {
     //Set date to current
     const d = new Date();
     setDate({
-      month: d.getMonth(),
+      month: d.getMonth() + 1,
       time: d.getHours(),
     });
   }, []);
