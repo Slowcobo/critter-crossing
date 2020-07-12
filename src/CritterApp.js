@@ -5,7 +5,7 @@ import CritterInfo from "./CritterInfo";
 
 export default function CritterApp() {
   const [mode, setMode] = useState("bugs");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState({ month: "", time: "" });
   const [critters, setCritters] = useState({ bugs: [], fish: [], sea: [] });
   const [currentCritter, setCurrentCritter] = useState();
   const [showCritterInfo, setShowCritterInfo] = useState(false);
@@ -23,7 +23,15 @@ export default function CritterApp() {
       };
       setCritters(critterData);
     };
+    //Get critter data from API
     getCritterData();
+
+    //Set date to current
+    const d = new Date();
+    setDate({
+      month: d.getMonth(),
+      time: d.getHours(),
+    });
   }, []);
 
   const getCritter = (critterId) => {
@@ -54,7 +62,7 @@ export default function CritterApp() {
       <button onClick={() => setMode("sea")}>Sea</button>
       <CritterList
         critters={critters[mode]}
-        date={date.getMonth()}
+        date={date}
         getCritter={getCritter}
       />
     </>

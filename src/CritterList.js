@@ -13,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
 export default function CritterList({ date, critters, getCritter }) {
   const classes = useStyles();
 
+  //Check if critter is available for the month & hour
+  const isAvailable = (critter) => {
+    return critter.availability["month-array-northern"].includes(date.month);
+  };
+
   return (
     <div className={classes.critterList}>
       {critters.map((critter) => (
@@ -21,9 +26,7 @@ export default function CritterList({ date, critters, getCritter }) {
           key={critter.id}
           icon={critter["icon_uri"]}
           name={critter.name["name-USen"]}
-          available={critter.availability["month-array-northern"].includes(
-            date
-          )}
+          available={isAvailable(critter)}
           getCritter={getCritter}
         />
       ))}
