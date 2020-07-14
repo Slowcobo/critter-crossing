@@ -1,16 +1,19 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   critterImage: {
     width: "100%",
+  },
+  miscInfo: {
+    display: "flex",
   },
 });
 
@@ -63,35 +66,56 @@ export default function CritterInfo({
     >
       <DialogTitle id="critter-name">{displayName}</DialogTitle>
       <DialogContent>
-        {/* Critter Image */}
-        <img
-          className={classes.critterImage}
-          src={critter["image_uri"]}
-          alt={displayName}
-        />
+        <Grid container justify="center">
+          {/* Critter Image */}
+          <Grid item>
+            <img
+              className={classes.critterImage}
+              src={critter["image_uri"]}
+              alt={displayName}
+            />
+          </Grid>
 
-        {/* Available Months and Times */}
-        <ul>
-          {critter.availability["month-array-northern"].map((month) => (
-            <li key={month}>{getMonth(month)}</li>
-          ))}
-        </ul>
-        <ul>
-          {critter.availability["time-array"].map((time) => (
-            <li key={time}>{time}</li>
-          ))}
-        </ul>
+          {/* Available Months and Times */}
+          <Grid item xs={12}>
+            <Typography variant="overline">Available Months</Typography>
+            <ul>
+              {critter.availability["month-array-northern"].map((month) => (
+                <li key={month}>{getMonth(month)}</li>
+              ))}
+            </ul>
+          </Grid>
 
-        <Typography>{critter.availability.location}</Typography>
+          <Grid item xs={12}>
+            <Typography variant="overline">Available Times</Typography>
+            <ul>
+              {critter.availability["time-array"].map((time) => (
+                <li key={time}>{time}</li>
+              ))}
+            </ul>
+          </Grid>
 
-        <Typography>{critter.availability.rarity}</Typography>
+          {/* Misc Info */}
+          <Grid item xs={4}>
+            <Typography variant="overline">Location</Typography>
+            <Typography>{critter.availability.location}</Typography>
+          </Grid>
 
-        <Typography>
-          {critter.price} {critter["price-flick"]}
-        </Typography>
+          <Grid item xs={4}>
+            <Typography variant="overline">Rarity</Typography>
+            <Typography>{critter.availability.rarity}</Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <Typography variant="overline">Prices</Typography>
+            <Typography>{`${critter.price}, ${critter["price-flick"]}`}</Typography>
+          </Grid>
 
-        {/* Blathers Phrase */}
-        <Typography>{critter["museum-phrase"]}</Typography>
+          {/* Blathers Phrase */}
+          <Grid item xs={12}>
+            <Typography variant="overline">Blathers Description</Typography>
+            <Typography>{critter["museum-phrase"]}</Typography>
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button onClick={() => getPreviousCritter(critter.id)} color="primary">
