@@ -82,6 +82,14 @@ export default function CritterInfo({
           ))}
         </ul>
 
+        <Typography>{critter.availability.location}</Typography>
+
+        <Typography>{critter.availability.rarity}</Typography>
+
+        <Typography>
+          {critter.price} {critter["price-flick"]}
+        </Typography>
+
         {/* Blathers Phrase */}
         <Typography>{critter["museum-phrase"]}</Typography>
       </DialogContent>
