@@ -6,6 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   critterImage: {
@@ -35,6 +36,24 @@ export default function CritterInfo({
     getCritter(index);
   };
 
+  const getMonth = (monthNum) => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return months[monthNum - 1];
+  };
+
   return (
     <Dialog
       open={showCritterInfo}
@@ -44,14 +63,27 @@ export default function CritterInfo({
     >
       <DialogTitle id="critter-name">{displayName}</DialogTitle>
       <DialogContent>
+        {/* Critter Image */}
         <img
           className={classes.critterImage}
           src={critter["image_uri"]}
           alt={displayName}
         />
-        <DialogContentText id="critter-description">
-          {critter["museum-phrase"]}
-        </DialogContentText>
+
+        {/* Available Months and Times */}
+        <ul>
+          {critter.availability["month-array-northern"].map((month) => (
+            <li key={month}>{getMonth(month)}</li>
+          ))}
+        </ul>
+        <ul>
+          {critter.availability["time-array"].map((time) => (
+            <li key={time}>{time}</li>
+          ))}
+        </ul>
+
+        {/* Blathers Phrase */}
+        <Typography>{critter["museum-phrase"]}</Typography>
       </DialogContent>
       <DialogActions>
         <Button onClick={() => getPreviousCritter(critter.id)} color="primary">
