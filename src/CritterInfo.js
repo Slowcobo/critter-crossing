@@ -112,11 +112,12 @@ export default function CritterInfo({
 
           {/* Blathers Phrase */}
           <Grid item xs={12}>
-            <Typography variant="overline">Blathers Description</Typography>
+            <Typography variant="overline">Blathers' Description</Typography>
             <Typography>{critter["museum-phrase"]}</Typography>
           </Grid>
         </Grid>
       </DialogContent>
+      
       <DialogActions>
         <Button onClick={() => getPreviousCritter(critter.id)} color="primary">
           Previous

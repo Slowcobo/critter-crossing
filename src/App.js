@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Navbar from "./Navbar";
 import CritterApp from "./CritterApp";
 import "./App.css";
+import { CritterProvider } from "./contexts/CritterContext";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -14,12 +15,14 @@ import "./App.css";
 function App() {
   // const classes = useStyles();
   return (
-    <Grid container justify="center">
-      <Navbar />
-      <Grid item xs={12} md={6}>
-        <CritterApp />
+    <CritterProvider>
+      <Grid container justify="center">
+        <Navbar />
+        <Grid item xs={12} md={6}>
+          <CritterApp />
+        </Grid>
       </Grid>
-    </Grid>
+    </CritterProvider>
   );
 }
 

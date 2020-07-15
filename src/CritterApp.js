@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -7,6 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
+import { CritterContext } from "./contexts/CritterContext";
 import CritterList from "./CritterList";
 import CritterInfo from "./CritterInfo";
 
@@ -21,8 +22,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CritterApp() {
+  const { critterType, changeCritterType } = useContext(CritterContext);
+
   const classes = useStyles();
-  const [mode, setMode] = useState("bugs");
   const [date, setDate] = useState({ month: "", time: "" });
   const [critters, setCritters] = useState({ bugs: [], fish: [], sea: [] });
   const [currentCritter, setCurrentCritter] = useState();
@@ -53,7 +55,7 @@ export default function CritterApp() {
   }, []);
 
   const getCritter = (critterId) => {
-    setCurrentCritter(critters[mode][critterId - 1]);
+    setCurrentCritter(critters[critterType][critterId - 1]);
     setShowCritterInfo(true);
   };
 
@@ -82,7 +84,7 @@ export default function CritterApp() {
       {currentCritter && (
         <CritterInfo
           critter={currentCritter}
-          critters={critters[mode]}
+          critters={critters[critterType]}
           getCritter={getCritter}
           showCritterInfo={showCritterInfo}
           closeCritterInfo={closeCritterInfo}
@@ -90,9 +92,9 @@ export default function CritterApp() {
       )}
 
       {/* Switch Critters */}
-      <button onClick={() => setMode("bugs")}>Bugs</button>
-      <button onClick={() => setMode("fish")}>Fish</button>
-      <button onClick={() => setMode("sea")}>Sea</button>
+      <button onClick={() => changeCritterType("bugs")}>Bugs</button>
+      <button onClick={() => changeCritterType("fish")}>Fish</button>
+      <button onClick={() => changeCritterType("sea")}>Sea</button>
 
       {/* Month Selection */}
       <FormControl className={classes.formControl}>
@@ -136,7 +138,7 @@ export default function CritterApp() {
 
       {/* List of current critters */}
       <CritterList
-        critters={critters[mode]}
+        critters={critters[critterType]}
         date={date}
         getCritter={getCritter}
       />
