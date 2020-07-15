@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CritterApp() {
   const { critterType, changeCritterType } = useContext(CritterContext);
-
   const classes = useStyles();
   const [date, setDate] = useState({ month: "", time: "" });
   const [critters, setCritters] = useState({ bugs: [], fish: [], sea: [] });
@@ -90,11 +89,6 @@ export default function CritterApp() {
           closeCritterInfo={closeCritterInfo}
         />
       )}
-
-      {/* Switch Critters */}
-      <button onClick={() => changeCritterType("bugs")}>Bugs</button>
-      <button onClick={() => changeCritterType("fish")}>Fish</button>
-      <button onClick={() => changeCritterType("sea")}>Sea</button>
 
       {/* Month Selection */}
       <FormControl className={classes.formControl}>
