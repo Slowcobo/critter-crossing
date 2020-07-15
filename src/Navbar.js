@@ -18,26 +18,34 @@ export default function Navbar() {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit">
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" color="inherit">
-            Critter Crossing
-          </Typography>
+    <>
+      <div className={classes.root}>
+        <AppBar position="static" color="primary">
+          <Toolbar>
+            <IconButton className={classes.menuButton} color="inherit">
+              <MenuIcon />
+            </IconButton>
+            <Typography className={classes.title} variant="h6" color="inherit">
+              Critter Crossing
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </div>
+      <div className={classes.root}>
+        <AppBar position="static" color="default">
           <Tabs
+            className={classes.tabs}
             value={critterType}
             onChange={handleChange}
             aria-label="critter types"
+            centered
           >
             <Tab label="Bugs" value={"bugs"} />
             <Tab label="Fish" value={"fish"} />
             <Tab label="Sea" value={"sea"} />
           </Tabs>
-        </Toolbar>
-      </AppBar>
-    </div>
+        </AppBar>
+      </div>
+    </>
   );
 }
