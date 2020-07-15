@@ -36,5 +36,3 @@ export default function CritterList({ date, critters, getCritter }) {
     </div>
   );
 }
-
-//Critter availability month-array-northern
