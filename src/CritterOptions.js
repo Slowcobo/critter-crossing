@@ -1,15 +1,39 @@
 import React, { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { monthMarks, timeMarks } from "./helpers";
+import { CritterContext } from "./contexts/CritterContext";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
-import { CritterContext } from "./contexts/CritterContext";
 
 const useStyles = makeStyles((theme) => ({
   critterOptions: {
     margin: "2rem auto",
-    padding: "1rem 2rem",
+    padding: "0 0.1rem",
+    borderRadius: "0.25rem",
   },
 }));
+
+const DateSlider = withStyles({
+  root: {
+    color: "#d0d0d0",
+    height: 12,
+  },
+  thumb: {
+    display: "none",
+  },
+  mark: {
+    height: 12,
+    color: "rgba(0,0,0,0.1)",
+  },
+  markLabel: {},
+  active: {},
+  track: {
+    height: 12,
+  },
+  rail: {
+    height: 12,
+  },
+})(Slider);
 
 export default function CritterOptions() {
   const { date, changeDate } = useContext(CritterContext);
@@ -25,39 +49,39 @@ export default function CritterOptions() {
     changeDate(newDate);
   };
 
+  //TODO: Account for months/times
   function valuetext(value) {
     return `${value}`;
   }
 
   return (
     <div className={classes.critterOptions}>
-      {/* Month Slider */}
-      <Typography id="month-slider" gutterBottom>
+      <Typography id="month-slider" variant="overline">
         Month
       </Typography>
-      <Slider
+      <DateSlider
         value={Number(date.month)}
         getAriaValueText={valuetext}
         aria-labelledby="month-slider"
-        valueLabelDisplay="auto"
         step={1}
-        marks
+        marks={monthMarks}
         min={1}
         max={12}
         onChange={handleMonthChange}
       />
+      {/* Month Slider */}
 
       {/* Time Slider */}
-      <Typography id="time-slider" gutterBottom>
+      <Typography id="time-slider" variant="overline">
         Time
       </Typography>
-      <Slider
+      <DateSlider
         value={Number(date.time)}
         getAriaValueText={valuetext}
         aria-labelledby="time-slider"
         valueLabelDisplay="auto"
         step={1}
-        marks
+        marks={timeMarks}
         min={0}
         max={23}
         onChange={handleTimeChange}
