@@ -19,16 +19,29 @@ const DateSlider = withStyles({
     height: 12,
   },
   thumb: {
-    display: "none",
+    height: 12,
+    width: 24,
+    borderRadius: 0,
+    marginTop: 0,
+    marginLeft: -12,
+    "&:hover": {
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+    },
   },
   mark: {
     height: 12,
-    color: "rgba(0,0,0,0.1)",
+    backgroundColor: "rgba(0,0,0,0.1)",
+  },
+  markActive: {
+    backgroundColor: "rgba(0,0,0,0.1)",
   },
   markLabel: {},
   active: {},
   track: {
-    height: 12,
+    display: "none",
   },
   rail: {
     height: 12,
@@ -79,7 +92,6 @@ export default function CritterOptions() {
         value={Number(date.time)}
         getAriaValueText={valuetext}
         aria-labelledby="time-slider"
-        valueLabelDisplay="auto"
         step={1}
         marks={timeMarks}
         min={0}
