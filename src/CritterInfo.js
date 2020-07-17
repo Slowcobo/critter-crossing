@@ -57,6 +57,10 @@ export default function CritterInfo({
     return months[monthNum - 1];
   };
 
+  const displaySpecialPrice = () => {
+    return critter["price-flick"] || critter["price-cj"];
+  };
+
   return (
     <Dialog
       open={showCritterInfo}
@@ -97,17 +101,30 @@ export default function CritterInfo({
 
           {/* Misc Info */}
           <Grid item xs={4}>
-            <Typography variant="overline">Location</Typography>
-            <Typography>{critter.availability.location}</Typography>
+            <Typography variant="overline">
+              {critter.availability.location ? "Location" : "Shadow"}
+            </Typography>
+            <Typography>
+              {critter.availability.location || critter.shadow}
+            </Typography>
           </Grid>
 
           <Grid item xs={4}>
-            <Typography variant="overline">Rarity</Typography>
-            <Typography>{critter.availability.rarity}</Typography>
+            <Typography variant="overline">
+              {critter.availability.rarity ? "Rarity" : "Speed"}
+            </Typography>
+            <Typography>
+              {critter.availability.rarity || critter.speed}
+            </Typography>
           </Grid>
           <Grid item xs={4}>
             <Typography variant="overline">Prices</Typography>
-            <Typography>{`${critter.price}, ${critter["price-flick"]}`}</Typography>
+
+            <Typography>
+              {critter.price},
+              {displaySpecialPrice &&
+                (critter["price-flick"] || critter["price-cj"])}
+            </Typography>
           </Grid>
 
           {/* Blathers Phrase */}
@@ -117,7 +134,7 @@ export default function CritterInfo({
           </Grid>
         </Grid>
       </DialogContent>
-      
+
       <DialogActions>
         <Button onClick={() => getPreviousCritter(critter.id)} color="primary">
           Previous
