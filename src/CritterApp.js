@@ -84,7 +84,7 @@ export default function CritterApp() {
       <Grid container item justify="center">
         <Grid item xs={12} md={6}>
           {showCollection ? (
-            <CritterCollection />
+            <CritterCollection critters={critters[critterType]} />
           ) : (
             <CritterList
               critters={critters[critterType]}
