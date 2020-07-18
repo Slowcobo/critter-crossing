@@ -11,7 +11,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CritterCollection({ date, critters, getCritter }) {
-  const [collection, setCollection] = useState([]);
+  const [collection, setCollection] = useState(
+    JSON.parse(window.localStorage.getItem("collection")) || []
+  );
   const [selected, setSelected] = useState([]);
   const classes = useStyles();
 
@@ -41,6 +43,9 @@ export default function CritterCollection({ date, critters, getCritter }) {
     // Save new collection
     setCollection(newCollection);
 
+    // Save to local storage
+    window.localStorage.setItem("collection", JSON.stringify(newCollection));
+
     //Reset selected
     setSelected([]);
   };
@@ -53,6 +58,9 @@ export default function CritterCollection({ date, critters, getCritter }) {
 
     // Save new collection
     setCollection(newCollection);
+
+    // Save to local storage
+    window.localStorage.setItem("collection", JSON.stringify(newCollection));
 
     //Reset selected
     setSelected([]);
