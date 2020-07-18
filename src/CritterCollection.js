@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { CritterContext } from "./contexts/CritterContext";
 import CritterThumbnail from "./CritterThumbnail";
 
 const useStyles = makeStyles((theme) => ({
@@ -12,10 +13,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CritterCollection({ date, critters, getCritter }) {
   const [collection, setCollection] = useState(
-    JSON.parse(window.localStorage.getItem("collection")) || []
+    JSON.parse(window.localStorage.getItem("collection")) || {
+      bugs: [],
+      fish: [],
+      sea: [],
+    }
   );
+  const { critterType } = useContext(CritterContext);
   const [selected, setSelected] = useState([]);
   const classes = useStyles();
+
+  useEffect(() => {
+    // Save collectionto local storage
+    window.localStorage.setItem("collection", JSON.stringify(collection));
+    //Reset selected
+    setSelected([]);
+  }, [collection]);
 
   const selectCritter = (critterId) => {
     // Check if critter is already selected
@@ -30,40 +43,29 @@ export default function CritterCollection({ date, critters, getCritter }) {
 
   const addToCollection = () => {
     //Copy current collection
-    const newCollection = [...collection];
+    const newCollection = collection[critterType];
 
     //Add selected critters to the collection
     selected.forEach(
       // Prevent repeat critters
       (critterId) => {
-        if (!collection.includes(critterId)) newCollection.push(critterId);
+        if (!collection[critterType].includes(critterId))
+          newCollection.push(critterId);
       }
     );
 
     // Save new collection
-    setCollection(newCollection);
-
-    // Save to local storage
-    window.localStorage.setItem("collection", JSON.stringify(newCollection));
-
-    //Reset selected
-    setSelected([]);
+    setCollection({ ...collection, [critterType]: newCollection });
   };
 
   const removeFromCollection = () => {
     //Remove selected critters from collection
-    const newCollection = collection.filter(
+    const newCollection = collection[critterType].filter(
       (critterId) => !selected.includes(critterId)
     );
 
     // Save new collection
-    setCollection(newCollection);
-
-    // Save to local storage
-    window.localStorage.setItem("collection", JSON.stringify(newCollection));
-
-    //Reset selected
-    setSelected([]);
+    setCollection({ ...collection, [critterType]: newCollection });
   };
 
   return (
@@ -79,7 +81,7 @@ export default function CritterCollection({ date, critters, getCritter }) {
             name={critter.name["name-USen"]}
             selectCritter={selectCritter}
             selected={selected.includes(critter.id)}
-            collected={collection.includes(critter.id)}
+            collected={collection[critterType].includes(critter.id)}
           />
         ))}
       </div>
