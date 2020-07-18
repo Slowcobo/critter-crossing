@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     opacity: (props) =>
       props.available || props.available === undefined ? "1" : "0.1",
   },
+  selected: {
+    backgroundColor: "yellow",
+  },
 }));
 
 export default function CritterThumbnail({
@@ -29,6 +32,7 @@ export default function CritterThumbnail({
   name,
   available,
   getCritter,
+  selectCritter,
 }) {
   const props = { available: available };
   const classes = useStyles(props);
@@ -37,8 +41,9 @@ export default function CritterThumbnail({
   const handleClick = () => {
     if (getCritter) {
       getCritter(id);
+    } else {
+      selectCritter(id);
     }
-    // TODO: Add to collection
   };
 
   return (
