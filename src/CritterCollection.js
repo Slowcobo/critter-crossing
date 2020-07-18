@@ -15,14 +15,19 @@ export default function CritterCollection({ date, critters, getCritter }) {
   const [collection, setCollection] = useState([]);
   const [selected, setSelected] = useState([]);
 
-  const selectCritter = (id) => {
-    const newSelection = [...selected, id];
-    // TODO: Toggle selection if already selected
-    setSelected(newSelection);
+  const selectCritter = (critterId) => {
+    // Check if critter is already selected
+    if (selected.includes(critterId)) {
+      // If so, filter it out
+      setSelected(selected.filter((id) => id !== critterId));
+    } else {
+      // Add selected critter
+      setSelected([...selected, critterId]);
+    }
   };
 
-  const isSelected = (id) => {
-    return selected.includes(id);
+  const isSelected = (critterId) => {
+    return selected.includes(critterId);
   };
 
   const addToCollection = () => {
@@ -30,9 +35,15 @@ export default function CritterCollection({ date, critters, getCritter }) {
     const newCollection = [...collection];
 
     //Add selected critters to the collection
-    selected.every((id) => newCollection.push(id));
+    selected.forEach(
+      // Prevent repeat critters
+      (critterId) => {
+        if (!collection.includes(critterId)) newCollection.push(critterId);
+      }
+    );
+
+    // Save new collection
     setCollection(newCollection);
-    // TODO: Check if critter exists
 
     //Reset selected
     setSelected([]);
