@@ -45,9 +45,23 @@ export default function CritterCollection({ date, critters, getCritter }) {
     setSelected([]);
   };
 
+  const removeFromCollection = () => {
+    //Remove selected critters from collection
+    const newCollection = collection.filter(
+      (critterId) => !selected.includes(critterId)
+    );
+
+    // Save new collection
+    setCollection(newCollection);
+
+    //Reset selected
+    setSelected([]);
+  };
+
   return (
     <>
       <button onClick={addToCollection}>Add to Collection</button>
+      <button onClick={removeFromCollection}>Remove from Collection</button>
       <div className={classes.critterList}>
         {critters.map((critter) => (
           <CritterThumbnail
