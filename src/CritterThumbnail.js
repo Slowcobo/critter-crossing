@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { darken } from "@material-ui/core/styles/colorManipulator";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
@@ -9,11 +10,20 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f1f1f1",
+    backgroundColor: (props) =>
+      (props.selected && "#ffff00") ||
+      (props.collected && "#00ff00") ||
+      "#f1f1f1",
     margin: "0.1rem",
     cursor: "pointer",
     "&:hover": {
-      backgroundColor: "#e1e1e1",
+      backgroundColor: (props) =>
+        darken(
+          (props.selected && "#ffff00") ||
+            (props.collected && "#00ff00") ||
+            "#f1f1f1",
+          0.05
+        ),
     },
   },
   critter: {
@@ -33,15 +43,24 @@ export default function CritterThumbnail({
   available,
   getCritter,
   selectCritter,
+  selected,
+  collected,
 }) {
-  const props = { available: available };
+  const props = {
+    available: available,
+    selected: selected,
+    collected: collected,
+  };
   const classes = useStyles(props);
   const displayName = name.charAt(0).toUpperCase() + name.slice(1);
 
   const handleClick = () => {
+    // If on critter list, get the critter
     if (getCritter) {
       getCritter(id);
-    } else {
+    }
+    // If on critter collection, select the critter
+    else {
       selectCritter(id);
     }
   };

@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CritterCollection({ date, critters, getCritter }) {
-  const classes = useStyles();
   const [collection, setCollection] = useState([]);
   const [selected, setSelected] = useState([]);
+  const classes = useStyles();
 
   const selectCritter = (critterId) => {
     // Check if critter is already selected
@@ -24,10 +24,6 @@ export default function CritterCollection({ date, critters, getCritter }) {
       // Add selected critter
       setSelected([...selected, critterId]);
     }
-  };
-
-  const isSelected = (critterId) => {
-    return selected.includes(critterId);
   };
 
   const addToCollection = () => {
@@ -60,7 +56,8 @@ export default function CritterCollection({ date, critters, getCritter }) {
             icon={critter["icon_uri"]}
             name={critter.name["name-USen"]}
             selectCritter={selectCritter}
-            selected={isSelected(critter.id)}
+            selected={selected.includes(critter.id)}
+            collected={collection.includes(critter.id)}
           />
         ))}
       </div>
