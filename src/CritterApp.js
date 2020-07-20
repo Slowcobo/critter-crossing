@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
 import { CritterContext } from "./contexts/CritterContext";
@@ -35,7 +35,6 @@ export default function CritterApp() {
       {currentCritter && (
         <CritterInfo
           critter={currentCritter}
-          critters={critters[critterType]}
           getCritter={getCritter}
           showCritterInfo={showCritterInfo}
           closeCritterInfo={closeCritterInfo}
@@ -67,12 +66,9 @@ export default function CritterApp() {
       <Grid container item justify="center">
         <Grid item xs={12} md={6}>
           {showCollection ? (
-            <CritterCollection critters={critters[critterType]} />
+            <CritterCollection />
           ) : (
-            <CritterList
-              critters={critters[critterType]}
-              getCritter={getCritter}
-            />
+            <CritterList getCritter={getCritter} />
           )}
         </Grid>
       </Grid>

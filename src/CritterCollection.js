@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
 import CritterThumbnail from "./CritterThumbnail";
 
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CritterCollection({ date, critters, getCritter }) {
+export default function CritterCollection() {
   const [collection, setCollection] = useState(
     JSON.parse(window.localStorage.getItem("collection")) || {
       bugs: [],
@@ -19,6 +20,7 @@ export default function CritterCollection({ date, critters, getCritter }) {
       sea: [],
     }
   );
+  const { critters } = useContext(CritterContext);
   const { critterType } = useContext(OptionsContext);
   const [selected, setSelected] = useState([]);
   const classes = useStyles();
@@ -72,8 +74,9 @@ export default function CritterCollection({ date, critters, getCritter }) {
     <>
       <button onClick={addToCollection}>Add to Collection</button>
       <button onClick={removeFromCollection}>Remove from Collection</button>
+      
       <div className={classes.critterList}>
-        {critters.map((critter) => (
+        {critters[critterType].map((critter) => (
           <CritterThumbnail
             id={critter.id}
             key={critter.id}

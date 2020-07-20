@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
 import { CritterContext } from "./contexts/CritterContext";
+import { OptionsContext } from "./contexts/OptionsContext";
 import { getMonth } from "./helpers";
 
 const useStyles = makeStyles({
@@ -21,24 +22,25 @@ const useStyles = makeStyles({
 
 export default function CritterInfo({
   critter,
-  critters,
   getCritter,
   showCritterInfo,
   closeCritterInfo,
 }) {
-  const { hemisphere } = useContext(CritterContext);
+  const { critters } = useContext(CritterContext);
+  const { critterType, hemisphere } = useContext(OptionsContext);
   const classes = useStyles();
+
   const displayName =
     critter.name["name-USen"].charAt(0).toUpperCase() +
     critter.name["name-USen"].slice(1);
 
   const getNextCritter = (id) => {
-    let index = id === critters.length ? 1 : critter.id + 1;
+    let index = id === critters[critterType].length ? 1 : critter.id + 1;
     getCritter(index);
   };
 
   const getPreviousCritter = (id) => {
-    let index = id === 1 ? critters.length : id - 1;
+    let index = id === 1 ? critters[critterType].length : id - 1;
     getCritter(index);
   };
 
