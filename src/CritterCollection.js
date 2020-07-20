@@ -24,7 +24,7 @@ export default function CritterCollection({ date, critters, getCritter }) {
   const classes = useStyles();
 
   useEffect(() => {
-    // Save collectionto local storage
+    // Save collection to local storage
     window.localStorage.setItem("collection", JSON.stringify(collection));
     //Reset selected
     setSelected([]);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -7,6 +7,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
+import { CritterContext } from "./contexts/CritterContext";
 
 const useStyles = makeStyles({
   critterImage: {
@@ -24,6 +25,7 @@ export default function CritterInfo({
   showCritterInfo,
   closeCritterInfo,
 }) {
+  const { hemisphere } = useContext(CritterContext);
   const classes = useStyles();
   const displayName =
     critter.name["name-USen"].charAt(0).toUpperCase() +
@@ -84,9 +86,11 @@ export default function CritterInfo({
           <Grid item xs={12}>
             <Typography variant="overline">Available Months</Typography>
             <ul>
-              {critter.availability["month-array-northern"].map((month) => (
-                <li key={month}>{getMonth(month)}</li>
-              ))}
+              {critter.availability[`month-array-${hemisphere}`].map(
+                (month) => (
+                  <li key={month}>{getMonth(month)}</li>
+                )
+              )}
             </ul>
           </Grid>
 
