@@ -77,9 +77,13 @@ export default function CritterOptions() {
   };
 
   //TODO: Account for months/times
-  function valuetext(value) {
-    return `${value}`;
-  }
+  const timeText = (value) => {
+    return value < 13 ? `${value}AM` : `${value}PM`;
+  };
+
+  const monthText = (value) => {
+    return monthMarks[value - 1];
+  };
 
   return (
     <div className={classes.critterOptions}>
@@ -122,7 +126,7 @@ export default function CritterOptions() {
       </Typography>
       <DateSlider
         value={Number(date.month)}
-        getAriaValueText={valuetext}
+        getAriaValueText={monthText}
         aria-labelledby="month-slider"
         step={1}
         marks={monthMarks}
@@ -137,7 +141,7 @@ export default function CritterOptions() {
       </Typography>
       <DateSlider
         value={Number(date.time)}
-        getAriaValueText={valuetext}
+        getAriaValueText={timeText}
         aria-labelledby="time-slider"
         step={1}
         marks={timeMarks}
