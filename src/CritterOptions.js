@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { monthMarks, timeMarks } from "./helpers";
-import { CritterContext } from "./contexts/CritterContext";
+import { OptionsContext } from "./contexts/OptionsContext";
 import Typography from "@material-ui/core/Typography";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -58,7 +58,7 @@ const DateSlider = withStyles({
 
 export default function CritterOptions() {
   const { hemisphere, changeHemisphere, date, changeDate } = useContext(
-    CritterContext
+    OptionsContext
   );
   const classes = useStyles();
 

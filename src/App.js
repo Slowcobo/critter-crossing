@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import CritterApp from "./CritterApp";
 import "./App.css";
 import { CritterProvider } from "./contexts/CritterContext";
+import { OptionsProvider } from "./contexts/OptionsContext";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -15,8 +16,10 @@ function App() {
   // const classes = useStyles();
   return (
     <CritterProvider>
-      <Navbar />
-      <CritterApp />
+      <OptionsProvider>
+        <Navbar />
+        <CritterApp />
+      </OptionsProvider>
     </CritterProvider>
   );
 }

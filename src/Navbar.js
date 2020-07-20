@@ -6,12 +6,12 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { CritterContext } from "./contexts/CritterContext";
+import { OptionsContext } from "./contexts/OptionsContext";
 import useStyles from "./styles/NavbarStyles";
 
 export default function Navbar() {
   const classes = useStyles();
-  const { critterType, changeCritterType } = useContext(CritterContext);
+  const { critterType, changeCritterType } = useContext(OptionsContext);
 
   const handleChange = (event, newValue) => {
     changeCritterType(newValue);

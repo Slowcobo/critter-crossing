@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { CritterContext } from "./contexts/CritterContext";
+import { OptionsContext } from "./contexts/OptionsContext";
 import CritterThumbnail from "./CritterThumbnail";
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CritterList({ critters, getCritter }) {
-  const { hemisphere, date } = useContext(CritterContext);
+  const { hemisphere, date } = useContext(OptionsContext);
   const classes = useStyles();
 
   // Check if critter is available for the month & hour

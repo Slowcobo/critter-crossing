@@ -1,40 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
 import { CritterContext } from "./contexts/CritterContext";
+import { OptionsContext } from "./contexts/OptionsContext";
 import CritterOptions from "./CritterOptions";
 import CritterList from "./CritterList";
 import CritterInfo from "./CritterInfo";
 import CritterCollection from "./CritterCollection";
 
 export default function CritterApp() {
-  const { critterType } = useContext(CritterContext);
-  const [critters, setCritters] = useState({ bugs: [], fish: [], sea: [] });
+  const { critters } = useContext(CritterContext);
+  const { critterType } = useContext(OptionsContext);
   const [currentCritter, setCurrentCritter] = useState();
   const [showCritterInfo, setShowCritterInfo] = useState(false);
   const [showCollection, setShowCollection] = useState(false);
-
-  useEffect(() => {
-    // Get critter data from API
-    const getCritterData = async () => {
-      try {
-        const bugRes = await axios.get("http://acnhapi.com/v1a/bugs/");
-        const fishRes = await axios.get("http://acnhapi.com/v1a/fish/");
-        const seaRes = await axios.get("http://acnhapi.com/v1a/sea/");
-
-        const critterData = {
-          bugs: bugRes.data,
-          fish: fishRes.data,
-          sea: seaRes.data,
-        };
-        setCritters(critterData);
-      } catch {
-        // TODO: Handle errors
-      }
-    };
-    getCritterData();
-  }, []);
 
   const getCritter = (critterId) => {
     setCurrentCritter(critters[critterType][critterId - 1]);

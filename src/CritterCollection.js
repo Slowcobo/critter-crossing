@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { CritterContext } from "./contexts/CritterContext";
+import { OptionsContext } from "./contexts/OptionsContext";
 import CritterThumbnail from "./CritterThumbnail";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +19,7 @@ export default function CritterCollection({ date, critters, getCritter }) {
       sea: [],
     }
   );
-  const { critterType } = useContext(CritterContext);
+  const { critterType } = useContext(OptionsContext);
   const [selected, setSelected] = useState([]);
   const classes = useStyles();
 
