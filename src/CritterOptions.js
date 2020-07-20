@@ -3,6 +3,10 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { monthMarks, timeMarks } from "./helpers";
 import { CritterContext } from "./contexts/CritterContext";
 import Typography from "@material-ui/core/Typography";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
 import Slider from "@material-ui/core/Slider";
 
 const useStyles = makeStyles((theme) => ({
@@ -10,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "2rem auto",
     padding: "0 0.1rem",
     borderRadius: "0.25rem",
+  },
+  label: {
+    display: "block",
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -49,8 +57,14 @@ const DateSlider = withStyles({
 })(Slider);
 
 export default function CritterOptions() {
-  const { date, changeDate } = useContext(CritterContext);
+  const { hemisphere, changeHemisphere, date, changeDate } = useContext(
+    CritterContext
+  );
   const classes = useStyles();
+
+  const handleHemisphereChange = (event) => {
+    changeHemisphere(event.target.value);
+  };
 
   const handleMonthChange = (event, value) => {
     const newDate = { ...date, month: value };
@@ -69,7 +83,41 @@ export default function CritterOptions() {
 
   return (
     <div className={classes.critterOptions}>
-      <Typography id="month-slider" variant="overline">
+      {/* Hemisphere Radio */}
+      <Typography
+        className={classes.label}
+        id="month-slider"
+        variant="overline"
+      >
+        Hemisphere
+      </Typography>
+      <FormControl component="fieldset">
+        <RadioGroup
+          row
+          aria-label="hemisphere"
+          name="hemisphere"
+          value={hemisphere}
+          onChange={handleHemisphereChange}
+        >
+          <FormControlLabel
+            value="northern"
+            control={<Radio color="primary" />}
+            label="Northern"
+          />
+          <FormControlLabel
+            value="southern"
+            control={<Radio color="primary" />}
+            label="Southern"
+          />
+        </RadioGroup>
+      </FormControl>
+
+      {/* Month Slider */}
+      <Typography
+        className={classes.label}
+        id="month-slider"
+        variant="overline"
+      >
         Month
       </Typography>
       <DateSlider
@@ -82,10 +130,9 @@ export default function CritterOptions() {
         max={12}
         onChange={handleMonthChange}
       />
-      {/* Month Slider */}
 
       {/* Time Slider */}
-      <Typography id="time-slider" variant="overline">
+      <Typography className={classes.label} id="time-slider" variant="overline">
         Time
       </Typography>
       <DateSlider
