@@ -11,11 +11,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CritterList({ date, critters, getCritter }) {
-  const { hemisphere } = useContext(CritterContext);
+export default function CritterList({ critters, getCritter }) {
+  const { hemisphere, date } = useContext(CritterContext);
   const classes = useStyles();
 
-  //Check if critter is available for the month & hour
+  // Check if critter is available for the month & hour
   const isAvailable = (critter) => {
     return (
       critter.availability[`month-array-${hemisphere}`].includes(date.month) &&

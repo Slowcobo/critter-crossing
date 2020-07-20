@@ -9,26 +9,30 @@ import CritterInfo from "./CritterInfo";
 import CritterCollection from "./CritterCollection";
 
 export default function CritterApp() {
-  const { critterType, date } = useContext(CritterContext);
+  const { critterType } = useContext(CritterContext);
   const [critters, setCritters] = useState({ bugs: [], fish: [], sea: [] });
   const [currentCritter, setCurrentCritter] = useState();
   const [showCritterInfo, setShowCritterInfo] = useState(false);
   const [showCollection, setShowCollection] = useState(false);
 
   useEffect(() => {
+    // Get critter data from API
     const getCritterData = async () => {
-      const bugRes = await axios.get("http://acnhapi.com/v1a/bugs/");
-      const fishRes = await axios.get("http://acnhapi.com/v1a/fish/");
-      const seaRes = await axios.get("http://acnhapi.com/v1a/sea/");
+      try {
+        const bugRes = await axios.get("http://acnhapi.com/v1a/bugs/");
+        const fishRes = await axios.get("http://acnhapi.com/v1a/fish/");
+        const seaRes = await axios.get("http://acnhapi.com/v1a/sea/");
 
-      const critterData = {
-        bugs: bugRes.data,
-        fish: fishRes.data,
-        sea: seaRes.data,
-      };
-      setCritters(critterData);
+        const critterData = {
+          bugs: bugRes.data,
+          fish: fishRes.data,
+          sea: seaRes.data,
+        };
+        setCritters(critterData);
+      } catch {
+        // TODO: Handle errors
+      }
     };
-    //Get critter data from API
     getCritterData();
   }, []);
 
@@ -59,22 +63,22 @@ export default function CritterApp() {
         />
       )}
 
-      {/* Month Selection */}
+      {/* Hemisphere and Date Selection */}
       <Grid container item justify="center">
         <Grid item xs={11} md={6}>
           <CritterOptions />
         </Grid>
       </Grid>
 
-      {/* Toggle List and Collection */}
+      {/* Toggle between List and Collection */}
       <Grid container item justify="center">
         <Grid item xs={12} md={6}>
           <Switch
             checked={showCollection}
             onChange={handleChange}
             color="primary"
-            name="checkedB"
-            inputProps={{ "aria-label": "primary checkbox" }}
+            name="toggleCollection"
+            inputProps={{ "aria-label": "toggle collection" }}
           />
           Show Collection
         </Grid>
@@ -88,7 +92,6 @@ export default function CritterApp() {
           ) : (
             <CritterList
               critters={critters[critterType]}
-              date={date}
               getCritter={getCritter}
             />
           )}

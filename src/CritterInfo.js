@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
 import { CritterContext } from "./contexts/CritterContext";
+import { getMonth } from "./helpers";
 
 const useStyles = makeStyles({
   critterImage: {
@@ -39,24 +40,6 @@ export default function CritterInfo({
   const getPreviousCritter = (id) => {
     let index = id === 1 ? critters.length : id - 1;
     getCritter(index);
-  };
-
-  const getMonth = (monthNum) => {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    return months[monthNum - 1];
   };
 
   const displaySpecialPrice = () => {

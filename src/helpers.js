@@ -1,3 +1,21 @@
+export const getMonth = (monthNum) => {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return months[monthNum - 1];
+};
+
 export const monthMarks = [
   { value: 1, label: "Jan" },
   { value: 2, label: "Feb" },

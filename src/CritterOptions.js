@@ -76,7 +76,6 @@ export default function CritterOptions() {
     changeDate(newDate);
   };
 
-  //TODO: Account for months/times
   const timeText = (value) => {
     return value < 13 ? `${value}AM` : `${value}PM`;
   };
