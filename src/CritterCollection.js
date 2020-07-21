@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+// import IconButton from "@material-ui/core/IconButton";
 import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
 import CritterThumbnail from "./CritterThumbnail";
@@ -13,6 +16,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CritterCollection() {
+  // Close the snackbar
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsSelecting(false);
+  };
+
   const [collection, setCollection] = useState(
     JSON.parse(window.localStorage.getItem("collection")) || {
       bugs: [],
@@ -20,6 +32,8 @@ export default function CritterCollection() {
       sea: [],
     }
   );
+  // Will open snackbar when selecting critters
+  const [isSelecting, setIsSelecting] = React.useState(false);
   const { critters } = useContext(CritterContext);
   const { critterType } = useContext(OptionsContext);
   const [selected, setSelected] = useState([]);
@@ -31,6 +45,16 @@ export default function CritterCollection() {
     //Reset selected
     setSelected([]);
   }, [collection]);
+
+  useEffect(() => {
+    // Close snackbar when selected critters are cleared or deselected
+    if (selected.length === 0) {
+      setIsSelecting(false);
+    } else {
+      // Open snackbar when critter is selected
+      setIsSelecting(true);
+    }
+  }, [selected]);
 
   const selectCritter = (critterId) => {
     // Check if critter is already selected
@@ -72,9 +96,25 @@ export default function CritterCollection() {
 
   return (
     <>
-      <button onClick={addToCollection}>Add to Collection</button>
-      <button onClick={removeFromCollection}>Remove from Collection</button>
-      
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        open={isSelecting}
+        onClose={handleClose}
+        action={
+          <React.Fragment>
+            <Button color="primary" onClick={addToCollection}>
+              Add to Collection
+            </Button>
+            <Button color="secondary" onClick={removeFromCollection}>
+              Remove from Collection
+            </Button>
+          </React.Fragment>
+        }
+      />
+
       <div className={classes.critterList}>
         {critters[critterType].map((critter) => (
           <CritterThumbnail
