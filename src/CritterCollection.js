@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-// import IconButton from "@material-ui/core/IconButton";
 import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
 import CritterThumbnail from "./CritterThumbnail";
@@ -42,7 +41,7 @@ export default function CritterCollection() {
   useEffect(() => {
     // Save collection to local storage
     window.localStorage.setItem("collection", JSON.stringify(collection));
-    //Reset selected
+    // Reset selected
     setSelected([]);
   }, [collection]);
 
@@ -68,10 +67,10 @@ export default function CritterCollection() {
   };
 
   const addToCollection = () => {
-    //Copy current collection
+    // Copy current collection
     const newCollection = collection[critterType];
 
-    //Add selected critters to the collection
+    // Add selected critters to the collection
     selected.forEach(
       // Prevent repeat critters
       (critterId) => {
@@ -85,13 +84,18 @@ export default function CritterCollection() {
   };
 
   const removeFromCollection = () => {
-    //Remove selected critters from collection
+    // Remove selected critters from collection
     const newCollection = collection[critterType].filter(
       (critterId) => !selected.includes(critterId)
     );
 
     // Save new collection
     setCollection({ ...collection, [critterType]: newCollection });
+  };
+
+  // Clear selected critters
+  const clearSelected = () => {
+    setSelected([]);
   };
 
   return (
@@ -106,11 +110,12 @@ export default function CritterCollection() {
         action={
           <React.Fragment>
             <Button color="primary" onClick={addToCollection}>
-              Add to Collection
+              Add
             </Button>
             <Button color="secondary" onClick={removeFromCollection}>
-              Remove from Collection
+              Remove
             </Button>
+            <Button onClick={clearSelected}>Clear</Button>
           </React.Fragment>
         }
       />
