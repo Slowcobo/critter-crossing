@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { monthMarks, timeMarks } from "./helpers";
 import { OptionsContext } from "./contexts/OptionsContext";
 import Typography from "@material-ui/core/Typography";
@@ -7,73 +6,8 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import Slider from "@material-ui/core/Slider";
-
-const useStyles = makeStyles((theme) => ({
-  critterOptions: {
-    margin: "2rem auto",
-    padding: "0 0.1rem",
-    borderRadius: "0.25rem",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  heading: {
-    width: "100%",
-    fontSize: "1.5rem",
-    padding: theme.spacing(1),
-    color: "#fff",
-    backgroundColor: theme.palette.primary.main,
-    boxShadow:
-      "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
-    borderRadius: 4,
-  },
-  label: {
-    display: "block",
-    marginTop: theme.spacing(2),
-    fontSize: "1rem",
-  },
-  formLabel: {
-    fontSize: "0.875rem",
-  },
-}));
-
-const DateSlider = withStyles((theme) => ({
-  root: {
-    height: 10,
-    width: "95%",
-  },
-  thumb: {
-    height: 24,
-    width: 24,
-    marginTop: -8,
-    marginLeft: -12,
-    color: theme.palette.secondary.main,
-    "&:focus, &:hover, &$active": {
-      boxShadow: "inherit",
-    },
-  },
-  active: {},
-  mark: {
-    display: "none",
-  },
-  markLabel: {
-    marginTop: theme.spacing(1),
-    color: theme.palette.text.primary,
-  },
-  markLabelActive: {},
-  track: {
-    height: 10,
-    borderRadius: 4,
-    backgroundColor: "transparent",
-  },
-  rail: {
-    height: 10,
-    borderRadius: 4,
-    opacity: 1,
-    backgroundColor: "rgba(0,0,0,0.1)",
-  },
-}))(Slider);
+import DateSlider from "./styles/DateSliderStyle";
+import useStyles from "./styles/CritterOptionsStyles";
 
 export default function CritterOptions() {
   const { hemisphere, changeHemisphere, date, changeDate } = useContext(
