@@ -39,11 +39,6 @@ export default function CritterOptions() {
 
   return (
     <div className={classes.critterOptions}>
-      {/* Heading */}
-      <Typography className={classes.heading} id="month-slider" variant="h2">
-        Critter Options
-      </Typography>
-
       {/* Hemisphere Radio */}
       <Typography
         className={classes.label}
