@@ -5,7 +5,11 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { OptionsContext } from "./contexts/OptionsContext";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginBottom: theme.spacing(1),
+  },
+}));
 
 export default function Navbar() {
   const classes = useStyles();
