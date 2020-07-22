@@ -14,47 +14,66 @@ const useStyles = makeStyles((theme) => ({
     margin: "2rem auto",
     padding: "0 0.1rem",
     borderRadius: "0.25rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  heading: {
+    width: "100%",
+    fontSize: "1.5rem",
+    padding: theme.spacing(1),
+    color: "#fff",
+    backgroundColor: theme.palette.primary.main,
+    boxShadow:
+      "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+    borderRadius: 4,
   },
   label: {
     display: "block",
     marginTop: theme.spacing(2),
+    fontSize: "1rem",
+  },
+  formLabel: {
+    fontSize: "0.875rem",
   },
 }));
 
-const DateSlider = withStyles({
+const DateSlider = withStyles((theme) => ({
   root: {
-    color: "#d0d0d0",
-    height: 12,
+    height: 10,
+    width: "95%",
   },
   thumb: {
-    height: 12,
+    height: 24,
     width: 24,
-    borderRadius: 0,
-    marginTop: 0,
+    marginTop: -8,
     marginLeft: -12,
-    "&:hover": {
-      boxShadow: "none",
-    },
-    "&:active": {
-      boxShadow: "none",
+    color: theme.palette.secondary.main,
+    "&:focus, &:hover, &$active": {
+      boxShadow: "inherit",
     },
   },
-  mark: {
-    height: 12,
-    backgroundColor: "rgba(0,0,0,0.1)",
-  },
-  markActive: {
-    backgroundColor: "rgba(0,0,0,0.1)",
-  },
-  markLabel: {},
   active: {},
-  track: {
+  mark: {
     display: "none",
   },
-  rail: {
-    height: 12,
+  markLabel: {
+    marginTop: theme.spacing(1),
+    color: theme.palette.text.primary,
   },
-})(Slider);
+  markLabelActive: {},
+  track: {
+    height: 10,
+    borderRadius: 4,
+    backgroundColor: "transparent",
+  },
+  rail: {
+    height: 10,
+    borderRadius: 4,
+    opacity: 1,
+    backgroundColor: "rgba(0,0,0,0.1)",
+  },
+}))(Slider);
 
 export default function CritterOptions() {
   const { hemisphere, changeHemisphere, date, changeDate } = useContext(
@@ -86,6 +105,11 @@ export default function CritterOptions() {
 
   return (
     <div className={classes.critterOptions}>
+      {/* Heading */}
+      <Typography className={classes.heading} id="month-slider" variant="h2">
+        Critter Options
+      </Typography>
+
       {/* Hemisphere Radio */}
       <Typography
         className={classes.label}
@@ -103,13 +127,15 @@ export default function CritterOptions() {
           onChange={handleHemisphereChange}
         >
           <FormControlLabel
+            classes={{ label: classes.formLabel }}
             value="northern"
-            control={<Radio color="primary" />}
+            control={<Radio color="secondary" />}
             label="Northern"
           />
           <FormControlLabel
+            classes={{ label: classes.formLabel }}
             value="southern"
-            control={<Radio color="primary" />}
+            control={<Radio color="secondary" />}
             label="Southern"
           />
         </RadioGroup>
