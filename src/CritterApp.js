@@ -1,15 +1,12 @@
 import React, { useState, useContext } from "react";
+import { Accordion } from "./OptionsAccordion";
+import { AccordionSummary } from "./OptionsAccordion";
+import { AccordionDetails } from "./OptionsAccordion";
 import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
 import Paper from "@material-ui/core/Paper";
-
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import MuiAccordion from "@material-ui/core/Accordion";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
-import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
 import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
 import Navbar from "./Navbar";
@@ -17,72 +14,8 @@ import CritterOptions from "./CritterOptions";
 import CritterList from "./CritterList";
 import CritterInfo from "./CritterInfo";
 import CritterCollection from "./CritterCollection";
-
 import critterIcon from "./icons/critter_icon.png";
-
-const useStyles = makeStyles((theme) => ({
-  temp: {
-    backgroundColor: theme.palette.primary.main,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: theme.spacing(3),
-  },
-  tempText: {
-    width: "75%",
-    color: theme.palette.common.white,
-  },
-  heading: {
-    backgroundColor: theme.palette.primary.light,
-    borderBottom: "1px solid rgba(0, 0, 0, .2)",
-    minHeight: 56,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingLeft: theme.spacing(2),
-  },
-}));
-
-const Accordion = withStyles({
-  root: {
-    // border: "1px solid rgba(0, 0, 0, .125)",
-    boxShadow: "none",
-    "&:not(:last-child)": {
-      borderBottom: 0,
-    },
-    "&:before": {
-      display: "none",
-    },
-    "&$expanded": {
-      margin: "auto",
-    },
-  },
-  expanded: {},
-})(MuiAccordion);
-
-const AccordionSummary = withStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.primary.light,
-    borderBottom: "1px solid rgba(0, 0, 0, .2)",
-    marginBottom: -1,
-    minHeight: 56,
-    "&$expanded": {
-      minHeight: 56,
-    },
-  },
-  content: {
-    "&$expanded": {
-      margin: "12px 0",
-    },
-  },
-  expanded: {},
-}))(MuiAccordionSummary);
-
-const AccordionDetails = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiAccordionDetails);
+import useStyles from "./styles/CritterAppStyles";
 
 export default function CritterApp() {
   const { critters } = useContext(CritterContext);
@@ -90,7 +23,6 @@ export default function CritterApp() {
   const [currentCritter, setCurrentCritter] = useState();
   const [showCritterInfo, setShowCritterInfo] = useState(false);
   const [showCollection, setShowCollection] = useState(false);
-
   const classes = useStyles();
 
   const getCritter = (critterId) => {

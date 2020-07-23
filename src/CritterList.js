@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
+    marginBottom: theme.spacing(1),
   },
 }));
 

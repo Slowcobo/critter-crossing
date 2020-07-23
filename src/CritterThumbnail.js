@@ -5,8 +5,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   critterContainer: {
-    height: "90px",
-    width: "90px",
+    height: "95px",
+    width: "95px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
