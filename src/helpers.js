@@ -57,3 +57,11 @@ export const timeMarks = [
   { value: "22", label: "" },
   { value: "23", label: "11PM" },
 ];
+
+export const timeText = (value) => {
+  return value < 13 ? `${value}AM` : `${value}PM`;
+};
+
+export const monthText = (value) => {
+  return monthMarks[value - 1];
+};

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { monthMarks, timeMarks } from "./helpers";
+import { monthMarks, monthText, timeMarks, timeText } from "./helpers";
 import { OptionsContext } from "./contexts/OptionsContext";
 import Typography from "@material-ui/core/Typography";
 import Radio from "@material-ui/core/Radio";
@@ -27,14 +27,6 @@ export default function CritterOptions() {
   const handleTimeChange = (event, value) => {
     const newDate = { ...date, time: value };
     changeDate(newDate);
-  };
-
-  const timeText = (value) => {
-    return value < 13 ? `${value}AM` : `${value}PM`;
-  };
-
-  const monthText = (value) => {
-    return monthMarks[value - 1];
   };
 
   return (
@@ -87,6 +79,7 @@ export default function CritterOptions() {
         min={1}
         max={12}
         onChange={handleMonthChange}
+        track={false}
       />
 
       {/* Time Slider */}
@@ -102,6 +95,7 @@ export default function CritterOptions() {
         min={0}
         max={23}
         onChange={handleTimeChange}
+        track={false}
       />
     </div>
   );

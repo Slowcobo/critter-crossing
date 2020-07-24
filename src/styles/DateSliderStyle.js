@@ -7,16 +7,24 @@ const DateSlider = withStyles((theme) => ({
     width: "95%",
   },
   thumb: {
-    height: 24,
-    width: 24,
-    marginTop: -8,
-    marginLeft: -12,
+    height: 20,
+    width: 20,
+    marginTop: -6,
+    marginLeft: -10,
     color: theme.palette.secondary.main,
     "&:focus, &:hover, &$active": {
       boxShadow: "inherit",
     },
+    "&$disabled": {
+      height: 10,
+      width: 20,
+      marginTop: 0,
+      marginLeft: -10,
+      borderRadius: 0,
+    },
   },
   active: {},
+  disabled: {},
   mark: {
     display: "none",
   },
@@ -25,11 +33,7 @@ const DateSlider = withStyles((theme) => ({
     color: theme.palette.text.primary,
   },
   markLabelActive: {},
-  track: {
-    height: 10,
-    borderRadius: 4,
-    backgroundColor: "transparent",
-  },
+  track: {},
   rail: {
     height: 10,
     borderRadius: 4,

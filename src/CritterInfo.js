@@ -1,24 +1,20 @@
 import React, { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
+import NavigateNextOutlinedIcon from "@material-ui/icons/NavigateNextOutlined";
+import NavigateBeforeOutlinedIcon from "@material-ui/icons/NavigateBeforeOutlined";
 import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
-import { getMonth } from "./helpers";
-
-const useStyles = makeStyles({
-  critterImage: {
-    width: "100%",
-  },
-  miscInfo: {
-    display: "flex",
-  },
-});
+import DateSlider from "./styles/DateSliderStyle";
+import { monthMarks, monthText, timeMarks, timeText } from "./helpers";
+import useStyles from "./styles/CritterInfoStyles";
 
 export default function CritterInfo({
   critter,
@@ -44,10 +40,6 @@ export default function CritterInfo({
     getCritter(index);
   };
 
-  const displaySpecialPrice = () => {
-    return critter["price-flick"] || critter["price-cj"];
-  };
-
   return (
     <Dialog
       open={showCritterInfo}
@@ -55,11 +47,21 @@ export default function CritterInfo({
       aria-labelledby="critter-name"
       aria-describedby="critter-description"
     >
-      <DialogTitle id="critter-name">{displayName}</DialogTitle>
+      <DialogTitle id="critter-name" className={classes.critterName}>
+        {displayName}
+        <IconButton
+          className={classes.closeButton}
+          aria-label="close-info"
+          color="default"
+          onClick={closeCritterInfo}
+        >
+          <CloseOutlinedIcon />
+        </IconButton>
+      </DialogTitle>
       <DialogContent>
         <Grid container justify="center">
           {/* Critter Image */}
-          <Grid item>
+          <Grid container item xs={12} justify="center">
             <img
               className={classes.critterImage}
               src={critter["image_uri"]}
@@ -68,29 +70,47 @@ export default function CritterInfo({
           </Grid>
 
           {/* Available Months and Times */}
-          <Grid item xs={12}>
-            <Typography variant="overline">Available Months</Typography>
-            <ul>
-              {critter.availability[`month-array-${hemisphere}`].map(
-                (month) => (
-                  <li key={month}>{getMonth(month)}</li>
-                )
-              )}
-            </ul>
+          <Grid className={classes.date} container item xs={12}>
+            <Typography className={classes.label} variant="overline">
+              Available Months
+            </Typography>
+            <DateSlider
+              value={critter.availability[`month-array-${hemisphere}`]}
+              getAriaValueText={monthText}
+              aria-labelledby="month-slider"
+              step={1}
+              marks={monthMarks}
+              min={1}
+              max={12}
+              track={false}
+              disabled
+            />
+          </Grid>
+
+          <Grid className={classes.date} container item xs={12}>
+            <Typography className={classes.label} variant="overline">
+              Available Times
+            </Typography>
+            <DateSlider
+              value={critter.availability["time-array"]}
+              getAriaValueText={timeText}
+              aria-labelledby="month-slider"
+              step={1}
+              marks={timeMarks}
+              min={0}
+              max={23}
+              track={false}
+              disabled
+            />
           </Grid>
 
           <Grid item xs={12}>
-            <Typography variant="overline">Available Times</Typography>
-            <ul>
-              {critter.availability["time-array"].map((time) => (
-                <li key={time}>{time}</li>
-              ))}
-            </ul>
+            <Divider className={classes.divider} />
           </Grid>
 
           {/* Misc Info */}
           <Grid item xs={4}>
-            <Typography variant="overline">
+            <Typography className={classes.label} variant="overline">
               {critter.availability.location ? "Location" : "Shadow"}
             </Typography>
             <Typography>
@@ -99,7 +119,7 @@ export default function CritterInfo({
           </Grid>
 
           <Grid item xs={4}>
-            <Typography variant="overline">
+            <Typography className={classes.label} variant="overline">
               {critter.availability.rarity ? "Rarity" : "Speed"}
             </Typography>
             <Typography>
@@ -107,33 +127,44 @@ export default function CritterInfo({
             </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography variant="overline">Prices</Typography>
+            <Typography className={classes.label} variant="overline">
+              Prices
+            </Typography>
 
             <Typography>
-              {critter.price},
-              {displaySpecialPrice &&
-                (critter["price-flick"] || critter["price-cj"])}
+              {critter.price}
+              {critterType !== "sea" &&
+                `, ${critter["price-flick"] || critter["price-cj"]} Bells`}
             </Typography>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Divider className={classes.divider} />
           </Grid>
 
           {/* Blathers Phrase */}
           <Grid item xs={12}>
-            <Typography variant="overline">Blathers' Description</Typography>
+            <Typography className={classes.label} variant="overline">
+              Blathers' Description
+            </Typography>
             <Typography>{critter["museum-phrase"]}</Typography>
           </Grid>
         </Grid>
       </DialogContent>
 
-      <DialogActions>
-        <Button onClick={() => getPreviousCritter(critter.id)} color="primary">
-          Previous
-        </Button>
-        <Button onClick={() => getNextCritter(critter.id)} color="primary">
-          Next
-        </Button>
-        <Button onClick={closeCritterInfo} color="primary">
-          Close
-        </Button>
+      <DialogActions className={classes.navButtons}>
+        <IconButton
+          aria-label="close-info"
+          onClick={() => getPreviousCritter(critter.id)}
+        >
+          <NavigateBeforeOutlinedIcon />
+        </IconButton>
+        <IconButton
+          aria-label="close-info"
+          onClick={() => getNextCritter(critter.id)}
+        >
+          <NavigateNextOutlinedIcon />
+        </IconButton>
       </DialogActions>
     </Dialog>
   );
