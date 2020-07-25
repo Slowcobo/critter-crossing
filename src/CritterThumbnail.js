@@ -10,17 +10,17 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: theme.spacing(0.3),
     backgroundColor: (props) =>
-      (props.selected && "#ffff00") ||
-      (props.collected && "#00ff00") ||
+      (props.selected && "#fff176") ||
+      (props.collected && "#81c784") ||
       "#f1f1f1",
-    margin: "0.1rem",
     cursor: "pointer",
     "&:hover": {
       backgroundColor: (props) =>
         darken(
-          (props.selected && "#ffff00") ||
-            (props.collected && "#00ff00") ||
+          (props.selected && "#fff176") ||
+            (props.collected && "#81c784") ||
             "#f1f1f1",
           0.05
         ),

@@ -17,9 +17,8 @@ const DateSlider = withStyles((theme) => ({
     },
     "&$disabled": {
       height: 10,
-      width: 20,
+      width: 10,
       marginTop: 0,
-      marginLeft: -10,
       borderRadius: 0,
     },
   },

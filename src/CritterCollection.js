@@ -2,9 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
+import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
+import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
+import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
 import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
 import CritterThumbnail from "./CritterThumbnail";
+import { SnackbarContent } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   critterList: {
@@ -12,9 +16,35 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     justifyContent: "center",
   },
+  snack: {
+    backgroundColor: theme.palette.secondary.main,
+    padding: 0,
+    display: "flex",
+    justifyContent: "center",
+  },
+  actions: {
+    marginLeft: 0,
+    marginRight: 0,
+    padding: theme.spacing(0.5),
+  },
 }));
 
 export default function CritterCollection() {
+  const [collection, setCollection] = useState(
+    JSON.parse(window.localStorage.getItem("collection")) || {
+      bugs: [],
+      fish: [],
+      sea: [],
+    }
+  );
+
+  // Will open snackbar when selecting critters
+  const [isSelecting, setIsSelecting] = React.useState(false);
+  const { critters } = useContext(CritterContext);
+  const { critterType } = useContext(OptionsContext);
+  const [selected, setSelected] = useState([]);
+  const classes = useStyles();
+
   // Close the snackbar
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -23,20 +53,6 @@ export default function CritterCollection() {
 
     setIsSelecting(false);
   };
-
-  const [collection, setCollection] = useState(
-    JSON.parse(window.localStorage.getItem("collection")) || {
-      bugs: [],
-      fish: [],
-      sea: [],
-    }
-  );
-  // Will open snackbar when selecting critters
-  const [isSelecting, setIsSelecting] = React.useState(false);
-  const { critters } = useContext(CritterContext);
-  const { critterType } = useContext(OptionsContext);
-  const [selected, setSelected] = useState([]);
-  const classes = useStyles();
 
   useEffect(() => {
     // Save collection to local storage
@@ -54,6 +70,11 @@ export default function CritterCollection() {
       setIsSelecting(true);
     }
   }, [selected]);
+
+  useEffect(() => {
+    // Prevent active selections from carrying over when critterType changes
+    setSelected([]);
+  }, [critterType]);
 
   const selectCritter = (critterId) => {
     // Check if critter is already selected
@@ -107,18 +128,31 @@ export default function CritterCollection() {
         }}
         open={isSelecting}
         onClose={handleClose}
-        action={
-          <React.Fragment>
-            <Button color="primary" onClick={addToCollection}>
-              Add
-            </Button>
-            <Button color="secondary" onClick={removeFromCollection}>
-              Remove
-            </Button>
-            <Button onClick={clearSelected}>Clear</Button>
-          </React.Fragment>
-        }
-      />
+      >
+        <SnackbarContent
+          classes={{ root: classes.snack, action: classes.actions }}
+          className={classes.actions}
+          action={
+            <React.Fragment>
+              <Button
+                startIcon={<AddCircleOutlineOutlinedIcon />}
+                onClick={addToCollection}
+              >
+                Add
+              </Button>
+              <Button
+                startIcon={<RemoveCircleOutlineOutlinedIcon />}
+                onClick={removeFromCollection}
+              >
+                Remove
+              </Button>
+              <Button startIcon={<ClearOutlinedIcon />} onClick={clearSelected}>
+                Clear
+              </Button>
+            </React.Fragment>
+          }
+        />
+      </Snackbar>
 
       <div className={classes.critterList}>
         {critters[critterType].map((critter) => (

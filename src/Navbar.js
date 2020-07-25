@@ -26,7 +26,7 @@ export default function Navbar() {
           value={critterType}
           onChange={handleChange}
           aria-label="critter types"
-          centered
+          variant="fullWidth"
         >
           <Tab label="Bugs" value={"bugs"} />
           <Tab label="Fish" value={"fish"} />

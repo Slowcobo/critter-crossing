@@ -46,6 +46,7 @@ export default function CritterInfo({
       onClose={closeCritterInfo}
       aria-labelledby="critter-name"
       aria-describedby="critter-description"
+      scroll={"body"}
     >
       <DialogTitle id="critter-name" className={classes.critterName}>
         {displayName}
@@ -134,7 +135,8 @@ export default function CritterInfo({
             <Typography>
               {critter.price}
               {critterType !== "sea" &&
-                `, ${critter["price-flick"] || critter["price-cj"]} Bells`}
+                `, ${critter["price-flick"] || critter["price-cj"]}`}{" "}
+              Bells
             </Typography>
           </Grid>
 

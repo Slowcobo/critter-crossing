@@ -69,7 +69,7 @@ export default function CritterApp() {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} md={10} lg={8}>
+      <Grid item xs={12} md={10} lg={7}>
         <Paper elevation={0}>
           {/* Hemisphere and Date Selection */}
           <Grid container item justify="center">
@@ -77,8 +77,8 @@ export default function CritterApp() {
               <Accordion defaultExpanded={true}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
+                  aria-controls="options-content"
+                  id="options-header"
                 >
                   <Typography>Options</Typography>
                 </AccordionSummary>
