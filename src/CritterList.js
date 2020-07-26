@@ -1,17 +1,8 @@
 import React, { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
 import CritterThumbnail from "./CritterThumbnail";
-
-const useStyles = makeStyles((theme) => ({
-  critterList: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    marginBottom: theme.spacing(1),
-  },
-}));
+import useStyles from "./styles/CritterListStyles";
 
 export default function CritterList({ getCritter }) {
   const { critters } = useContext(CritterContext);

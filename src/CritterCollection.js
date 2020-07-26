@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
@@ -9,25 +8,7 @@ import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
 import CritterThumbnail from "./CritterThumbnail";
 import { SnackbarContent } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  critterList: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-  },
-  snack: {
-    backgroundColor: theme.palette.secondary.main,
-    padding: 0,
-    display: "flex",
-    justifyContent: "center",
-  },
-  actions: {
-    marginLeft: 0,
-    marginRight: 0,
-    padding: theme.spacing(0.5),
-  },
-}));
+import useStyles from "./styles/CritterCollectionStyles";
 
 export default function CritterCollection() {
   const [collection, setCollection] = useState(
