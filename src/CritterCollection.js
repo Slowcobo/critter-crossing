@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
+import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@material-ui/icons/RemoveCircleOutlineOutlined";
 import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
 import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
 import CritterThumbnail from "./CritterThumbnail";
-import { SnackbarContent } from "@material-ui/core";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
 import useStyles from "./styles/CritterCollectionStyles";
 
 export default function CritterCollection() {
@@ -148,6 +149,12 @@ export default function CritterCollection() {
           />
         ))}
       </div>
+
+      <Typography>
+        You have collected {collection[critterType].length} out of{" "}
+        {critters[critterType].length}{" "}
+        {critterType === "sea" ? `${critterType} critters` : critterType}.
+      </Typography>
     </>
   );
 }

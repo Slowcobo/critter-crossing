@@ -9,12 +9,12 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { CritterContext } from "./contexts/CritterContext";
 import { OptionsContext } from "./contexts/OptionsContext";
+import CritterAppDescription from "./CritterAppDescription";
 import Navbar from "./Navbar";
 import CritterOptions from "./CritterOptions";
 import CritterList from "./CritterList";
 import CritterInfo from "./CritterInfo";
 import CritterCollection from "./CritterCollection";
-import critterIcon from "./icons/critter_icon.png";
 import useStyles from "./styles/CritterAppStyles";
 
 export default function CritterApp() {
@@ -54,18 +54,7 @@ export default function CritterApp() {
       {/* App Explanation */}
       <Grid container item justify="center">
         <Grid item xs={12} lg={8}>
-          <div className={classes.temp}>
-            <img src={critterIcon} alt="" />
-            <div className={classes.tempText}>
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum."
-            </div>
-          </div>
+          <CritterAppDescription />
         </Grid>
       </Grid>
 
