@@ -1,26 +1,19 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import { CritterProvider } from "./contexts/CritterContext";
 import { OptionsProvider } from "./contexts/OptionsContext";
+import theme from "./Theme";
 import Topbar from "./Topbar";
 import CritterApp from "./CritterApp";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.primary.main,
-  },
-}));
-
 function App() {
-  const classes = useStyles();
-
   return (
     <CritterProvider>
       <OptionsProvider>
-        <div className={classes.root}>
+        <ThemeProvider theme={theme}>
           <Topbar />
           <CritterApp />
-        </div>
+        </ThemeProvider>
       </OptionsProvider>
     </CritterProvider>
   );
