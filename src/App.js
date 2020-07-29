@@ -5,15 +5,20 @@ import { OptionsProvider } from "./contexts/OptionsContext";
 import theme from "./Theme";
 import Topbar from "./Topbar";
 import CritterApp from "./CritterApp";
+import Footer from "./Footer";
+import "./App.css";
 
 function App() {
   return (
     <CritterProvider>
       <OptionsProvider>
-        <ThemeProvider theme={theme}>
-          <Topbar />
-          <CritterApp />
-        </ThemeProvider>
+        <div className="App">
+          <ThemeProvider theme={theme}>
+            <Topbar />
+            <CritterApp />
+            <Footer />
+          </ThemeProvider>
+        </div>
       </OptionsProvider>
     </CritterProvider>
   );

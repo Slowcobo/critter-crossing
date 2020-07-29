@@ -1,5 +1,4 @@
 import React from "react";
-import critterIcon from "./icons/critter_icon.png";
 import useStyles from "./styles/CritterAppDescriptionStyles";
 
 export default function CritterAppDescription() {
@@ -8,7 +7,6 @@ export default function CritterAppDescription() {
   return (
     <div>
       <div className={classes.description}>
-        <img src={critterIcon} alt="" />
         <div className={classes.descriptionText}>
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

@@ -3,6 +3,7 @@ import { Accordion } from "./OptionsAccordion";
 import { AccordionSummary } from "./OptionsAccordion";
 import { AccordionDetails } from "./OptionsAccordion";
 import Grid from "@material-ui/core/Grid";
+import Tooltip from "@material-ui/core/Tooltip";
 import Switch from "@material-ui/core/Switch";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -51,15 +52,11 @@ export default function CritterApp() {
         />
       )}
 
-      {/* App Explanation */}
-      <Grid container item justify="center">
-        <Grid item xs={12} lg={8}>
-          <CritterAppDescription />
-        </Grid>
-      </Grid>
-
       <Grid item xs={12} md={10} lg={7}>
-        <Paper elevation={0}>
+        <Paper elevation={5}>
+          {/* App Explanation */}
+          <CritterAppDescription />
+
           {/* Hemisphere and Date Selection */}
           <Grid container item justify="center">
             <Grid item xs={12}>
@@ -83,13 +80,15 @@ export default function CritterApp() {
             <Grid item xs={12}>
               <div className={classes.heading}>
                 Critters
-                <Switch
-                  checked={showCollection}
-                  onChange={handleChange}
-                  color="primary"
-                  name="toggleCollection"
-                  inputProps={{ "aria-label": "toggle collection" }}
-                />
+                <Tooltip title="View Collection" arrow>
+                  <Switch
+                    checked={showCollection}
+                    onChange={handleChange}
+                    color="default"
+                    name="toggleCollection"
+                    inputProps={{ "aria-label": "toggle collection" }}
+                  />
+                </Tooltip>
               </div>
               <Navbar />
             </Grid>

@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   description: {
-    backgroundColor: theme.palette.primary.main,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -10,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
   },
   descriptionText: {
     width: "75%",
-    color: theme.palette.common.white,
   },
 }));
 
