@@ -1,6 +1,5 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import critterBug from "./critterBug.png";
 import critterFish from "./critterFish.png";
 import critterSea from "./critterSea.png";
@@ -13,9 +12,9 @@ export default function CritterAppDescription() {
     <div>
       <div className={classes.description}>
         <div className={classes.descriptionImages}>
-          <img src={critterBug} />
-          <img src={critterFish} />
-          <img src={critterSea} />
+          <img src={critterBug} style={{ transform: "rotate(5deg)" }} />
+          <img src={critterFish} style={{ transform: "rotate(-5deg)" }} />
+          <img src={critterSea} style={{ transform: "rotate(5deg)" }} />
         </div>
 
         <div className={classes.descriptionText}>
@@ -23,7 +22,6 @@ export default function CritterAppDescription() {
             This is an interactive Critterpedia application based on Animal
             Crossing: New Horizons.
           </Typography>
-          <Divider style={{ backgroundColor: "white", marginBottom: "2rem" }} />
           <Typography variant="h2">
             Use the hemisphere selector along with the month and time sliders to
             view the available critters.

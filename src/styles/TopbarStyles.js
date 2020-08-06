@@ -8,13 +8,13 @@ const useStyles = makeStyles((theme) => ({
   topbar: {
     backgroundColor: "transparent",
     color: theme.palette.common.white,
-    marginBottom: theme.spacing(1),
     boxShadow: "none",
   },
   title: {
-    letterSpacing: "0.1rem",
-    fontSize: "1.6rem",
-    marginLeft: theme.spacing(1),
+    letterSpacing: "0.2rem",
+    fontSize: "1.8rem",
+    fontWeight: 500,
+    textShadow: "0 2px 3px rgba(0,0,0,0.5)",
   },
 }));
 

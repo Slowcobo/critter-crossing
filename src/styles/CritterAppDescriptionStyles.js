@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "1.3rem",
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
+      borderBottom: "2px dashed white",
     },
     "& h2": {
       fontSize: "0.9rem",
