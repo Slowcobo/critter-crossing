@@ -1,4 +1,9 @@
 import React from "react";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import critterBug from "./critterBug.png";
+import critterFish from "./critterFish.png";
+import critterSea from "./critterSea.png";
 import useStyles from "./styles/CritterAppDescriptionStyles";
 
 export default function CritterAppDescription() {
@@ -7,14 +12,28 @@ export default function CritterAppDescription() {
   return (
     <div>
       <div className={classes.description}>
+        <div className={classes.descriptionImages}>
+          <img src={critterBug} />
+          <img src={critterFish} />
+          <img src={critterSea} />
+        </div>
+
         <div className={classes.descriptionText}>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum."
+          <Typography variant="h1">
+            This is an interactive Critterpedia application based on Animal
+            Crossing: New Horizons.
+          </Typography>
+          <Divider style={{ backgroundColor: "white", marginBottom: "2rem" }} />
+          <Typography variant="h2">
+            Use the hemisphere selector along with the month and time sliders to
+            view the available critters.
+          </Typography>
+          <Typography variant="h2">
+            Click on a critter in the list to view the details for that critter.
+          </Typography>
+          <Typography variant="h2">
+            Flip the switch to view and manage your personal collection.
+          </Typography>
         </div>
       </div>
     </div>

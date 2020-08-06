@@ -5,10 +5,29 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: theme.spacing(3),
+    marginBottom: theme.spacing(1),
+    padding: theme.spacing(1),
+  },
+  descriptionImages: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "nowrap",
+    "& img": {
+      width: "33.33%",
+    },
   },
   descriptionText: {
-    width: "75%",
+    color: theme.palette.common.white,
+    letterSpacing: "0.01rem",
+    "& h1": {
+      fontSize: "1.3rem",
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+    },
+    "& h2": {
+      fontSize: "0.9rem",
+      marginBottom: theme.spacing(3),
+    },
   },
 }));
 

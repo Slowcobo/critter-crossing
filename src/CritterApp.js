@@ -53,10 +53,10 @@ export default function CritterApp() {
       )}
 
       <Grid item xs={12} md={10} lg={7}>
-        <Paper elevation={5}>
-          {/* App Explanation */}
-          <CritterAppDescription />
+        {/* App Explanation */}
+        <CritterAppDescription />
 
+        <Paper elevation={5}>
           {/* Hemisphere and Date Selection */}
           <Grid container item justify="center">
             <Grid item xs={12}>
