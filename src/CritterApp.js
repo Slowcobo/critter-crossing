@@ -66,7 +66,9 @@ export default function CritterApp() {
                   aria-controls="options-content"
                   id="options-header"
                 >
-                  <Typography>Options</Typography>
+                  <Typography style={{ fontSize: "1.15rem" }}>
+                    Options
+                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <CritterOptions />

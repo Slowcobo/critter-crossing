@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     paddingLeft: theme.spacing(2),
+    fontSize: "1.15rem",
   },
 }));
 

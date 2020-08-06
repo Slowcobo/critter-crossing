@@ -12,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
   },
   title: {
-    letterSpacing: "0.05rem",
-    fontSize: "1.3rem",
+    letterSpacing: "0.1rem",
+    fontSize: "1.6rem",
     marginLeft: theme.spacing(1),
   },
 }));

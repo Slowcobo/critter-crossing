@@ -10,27 +10,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     margin: theme.spacing(0.3),
     backgroundColor: (props) =>
-      (props.selected && "#fff176") ||
-      (props.collected && "#81c784") ||
-      "#f1f1f1",
+      props.selected ? darken("#f1f1f1", 0.05) : "#f1f1f1",
     cursor: "pointer",
     "&:hover": {
-      backgroundColor: (props) =>
-        darken(
-          (props.selected && "#fff176") ||
-            (props.collected && "#81c784") ||
-            "#f1f1f1",
-          0.05
-        ),
+      backgroundColor: darken("#f1f1f1", 0.05),
     },
   },
   critter: {
     width: "70%",
-    opacity: (props) =>
-      props.available || props.available === undefined ? "1" : "0.1",
-  },
-  selected: {
-    backgroundColor: "yellow",
+    opacity: (props) => (props.available || props.collected ? "1" : "0.1"),
   },
 }));
 

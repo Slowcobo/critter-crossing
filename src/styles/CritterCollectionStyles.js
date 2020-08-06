@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   trackerText: {
-    margin: theme.spacing(2),
+    backgroundColor: theme.palette.secondary.light,
+    borderRadius: "1rem",
+    padding: theme.spacing(1),
+    margin: theme.spacing(1),
   },
 }));
 
