@@ -101,6 +101,21 @@ export default function CritterCollection() {
     setSelected([]);
   };
 
+  const getProgressComment = () => {
+    const progress =
+      collection[critterType].length / critters[critterType].length;
+    if (progress === 1) {
+      return "You caught them all! 🎉";
+    } else if (progress > 0.74) {
+      return "On the home stretch! 🙌";
+    } else if (progress > 0.49) {
+      return "Halfway there! 👏";
+    } else if (progress > 0.24) {
+      return "Keep up the good work! 😄";
+    }
+    return "Get out there and start catching! 😊";
+  };
+
   return (
     <>
       <Snackbar
@@ -150,11 +165,15 @@ export default function CritterCollection() {
         ))}
       </div>
 
-      <Typography>
-        You have collected {collection[critterType].length} out of{" "}
-        {critters[critterType].length}{" "}
-        {critterType === "sea" ? `${critterType} critters` : critterType}.
-      </Typography>
+      <div className={classes.tracker}>
+        <Typography className={classes.trackerText}>
+          {`You have collected ${collection[critterType].length} out of ${
+            critters[critterType].length
+          } ${
+            critterType === "sea" ? `${critterType} critters` : critterType
+          }. ${getProgressComment()}`}
+        </Typography>
+      </div>
     </>
   );
 }

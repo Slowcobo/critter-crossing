@@ -17,6 +17,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 0,
     padding: theme.spacing(0.5),
   },
+  tracker: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  trackerText: {
+    margin: theme.spacing(2),
+  },
 }));
 
 export default useStyles;
